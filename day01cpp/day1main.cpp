@@ -40,5 +40,14 @@ int main(int argc, char* argv[]){
     }
     cout <<"Sum of cal values is: " <<sum<<endl;
 
+    uint64_t sim_score_sum = 0;
+    for (int i = 0; i < left.size(); ++i){
+        int count = std::count(right.begin(), right.end(), left[i]);
+        int sim_score = left[i] * count;
+        sim_score_sum += sim_score;
+    }
+    cout <<"Sum of similarity score is: " <<sim_score_sum<<endl;
+
+
     return 0;
 }
