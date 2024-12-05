@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
 project(AOC2024)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(day01cpp day01cpp/day1main.cpp)
 add_executable(day02cpp day02cpp/main.cpp)
 add_executable(day03cpp day03cpp/main.cpp)
 #add_executable(day04cpp day04cpp/main.cpp)
-#add_executable(day05cpp day05cpp/main.cpp)
+add_executable(day05cpp day05cpp/main.cpp)
 #add_executable(day06cpp day06cpp/main.cpp)
 #add_executable(day07cpp day07cpp/main.cpp)
 #add_executable(day08cpp day08cpp/main.cpp)
