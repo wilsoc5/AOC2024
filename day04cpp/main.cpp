@@ -41,6 +41,7 @@ int main(int argc, char* argv[]){
     cout <<board<<endl;
 
     int occurrences = 0;
+    int p2 = 0;
     for (int32_t ri = 0; ri < board.size(); ri++){
         const string r = board[ri];
         cout <<"Running row " <<ri << ": " <<r <<endl;
@@ -138,10 +139,26 @@ int main(int argc, char* argv[]){
                     }
                 }
             }
+            if (r[ci] == 'A'){
+                //vertical down
+                if ((ri + 1 < board.size()) && (ri > 0)){
+                    if ((ci > 0) && (ci + 1 < r.length())){
+                        //diagonal X Left;
+                        if ((((board[ri + 1][ci - 1] == 'M') && (board[ri - 1][ci + 1] == 'S') ) || 
+                             ((board[ri + 1][ci - 1] == 'S') && (board[ri - 1][ci + 1] == 'M') ) ) && 
+                            (((board[ri + 1][ci + 1] == 'M') && (board[ri - 1][ci - 1] == 'S') ) || 
+                            ((board[ri + 1][ci + 1] == 'S') && (board[ri - 1][ci - 1] == 'M') ) )){
+                          cout <<"\t[ " <<ri <<"," <<ci <<"] Diag Down Left \n";
+                          ++p2;
+                        }
+                    }
+                }
+            }
         }
     }
 
     cout <<"Number: " <<occurrences<<endl;
+    cout <<"P2 Number: " <<p2<<endl;
 
     return 0;
 }
