@@ -124,6 +124,7 @@ uint64_t check_rules(std::pair<rules_t, set_t>& msp){
     const rules_t& m = msp.first;
     const set_t& s = msp.second;
     uint64_t res = 0;
+    uint64_t res2 = 0;
 
     for (uint32_t i = 0; i < s.size(); ++i){
         bool valid = true;
@@ -155,9 +156,44 @@ uint64_t check_rules(std::pair<rules_t, set_t>& msp){
             auto mid = si[si.size() / 2];
             cout <<" Middle value: " <<mid <<endl;
             res += mid;
+        } else {
+            cout <<"Set " <<si <<" Incorrectly ordered." <<endl;
+            update_t si2 = si;
+            bool swapped = true;
+            while (swapped){
+                swapped = false;
+                for (uint32_t j = 0; j < si2.size(); ++j){
+                    auto val = si2[j];
+                    cout <<"\tVal: " <<val ;
+                    if (m.contains(val)){
+                        auto r = m.at(val);
+                        cout <<"\t" <<r ;
+                        for (auto&& k : r){
+                            cout <<"\t" <<k;
+                            auto resit = std::find(si2.begin(), si2.end(), k);
+                            if (resit == si2.end())
+                                continue;
+                            auto idx = resit - si2.begin();
+                            if (idx < j) {
+                                cout <<"| Before: " <<si2 <<"|";
+                                std::swap(si2[j],si2[idx]);
+                                cout <<"\t Swap " <<k <<" @ "<<idx <<" > " <<j;
+                                cout <<"| After: " <<si2 <<"|";
+                                swapped = true;
+                            }
+                        }
+                    }
+                    cout <<endl;
+                }
+            }
+            cout <<"\t" <<"Updated Set Order: " <<si2 <<endl;
+            auto mid = si2[si2.size() / 2];
+            cout <<" Middle value: " <<mid <<endl;
+            res2 += mid;
         }
     }
     cout <<"Res: " <<res <<endl;
+    cout <<"Res2: " <<res2 <<endl;
     return res;
 }
 
